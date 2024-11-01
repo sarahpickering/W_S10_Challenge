@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useReducer } from 'react'
+import { useCreateOrderMutation } from '../state/pizzaApi'
 
-const initialFormState = { // suggested
+const initialFormState = { 
   fullName: '',
   size: '',
   '1': false,
@@ -10,7 +11,21 @@ const initialFormState = { // suggested
   '5': false,
 }
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'CHANGE_INPUT': {
+      const { name, value } = action.payload
+      return { ...state, [name]: value }
+    }
+    case 'RESET_FORM': 
+      return initialFormState
+    default:
+      return state
+  }
+}
+
 export default function PizzaForm() {
+  const [form, dispatch] = useReducer(reducer, initialFormState)
   return (
     <form>
       <h2>Pizza Form</h2>
