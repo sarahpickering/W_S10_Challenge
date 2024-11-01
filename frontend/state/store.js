@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import filtersReducer from './filtersSlice'
 import { pizzaApi } from './pizzaApi'
+
 export const resetStore = () => configureStore({
   reducer: {
     filters: filtersReducer,
